@@ -86,12 +86,12 @@ public class AdvertiserRS
 			
 		} catch (AdvertiserBusinessException  businessException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "createNewAdverstiser", "Business Exception occured while saving details into database");
+			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "createNewAdverstiser", businessException.getMessage());
 			Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		catch (AdvertiserSystemException  systemException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "createNewAdverstiser", "System Exception occured while saving details into database");
+			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "createNewAdverstiser", systemException.getMessage());
 			Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 			return Response.ok(responseRO.isCreated()).build();		
@@ -109,12 +109,12 @@ public class AdvertiserRS
 			
 		} catch (AdvertiserBusinessException  businessException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "updateAdverstiser", "Business Exception occured while updating details into database");
+			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "updateAdverstiser", businessException.getMessage());
 			Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		catch (AdvertiserSystemException  systemException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "updateAdverstiser", "System Exception occured while updating details into database");
+			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, "updateAdverstiser", systemException.getMessage());
 			Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 			return Response.ok(responseRO.isUpdated()).build();
@@ -131,12 +131,12 @@ public class AdvertiserRS
 		} 
 		catch (AdvertiserBusinessException  businessException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, method_name, "Business Exception occured while deleting details from database");
+			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, method_name, businessException.getMessage());
 			Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		catch (AdvertiserSystemException  systemException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, method_name, "System Exception occured while deleting details from database");
+			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, method_name, systemException.getMessage());
 			Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}		
 		return Response.ok(responseRO.isDeleted()).build();
