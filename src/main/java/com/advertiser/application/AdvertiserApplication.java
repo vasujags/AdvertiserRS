@@ -8,7 +8,7 @@ import javax.ws.rs.core.Application;
 
 import com.advertiser.resource.AdvertiserRS;
 
-@ApplicationPath("/")
+@ApplicationPath("/v1")
 public class AdvertiserApplication extends Application
 {		
 	 @Override
