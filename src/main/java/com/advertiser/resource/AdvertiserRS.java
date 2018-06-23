@@ -25,6 +25,7 @@ import com.advertiser.exception.AdvertiserSystemException;
 import com.advertiser.handler.AdvertiserDetailsHandler;
 import com.advertiser.mapper.AdvertiserDetailsMapper;
 import com.advertiser.response.AdvertiserResponseRO;
+import com.advertiser.type.ErrorCodeType.CNInvalid;
 import com.advertiser.util.AdvertiserStatus;
 
 import DataObject.AdvertiserDO;
@@ -43,6 +44,7 @@ public class AdvertiserRS
 	private AdvertiserDetailsMapper detailsMapper;
 	
 	private static final String CLASS_NAME =AdvertiserRS.class.getCanonicalName();
+	private static final Logger LOGGER = Logger.getLogger(CLASS_NAME);
 	
 	/**
 	 * This method is to retrieve advertiser details based on a given contactNumber.
@@ -51,7 +53,7 @@ public class AdvertiserRS
 	 */
 	@GET
 	@Path("{contactNumber}")
-	public Response retrieveAdvertiserDetails(@Pattern(regexp="(^$|[0-9]{10})")@PathParam("contactNumber") String contactNumber)
+	public Response retrieveAdvertiserDetails(@Pattern(regexp="(^$|[0-9]{10})",payload =CNInvalid.class)@PathParam("contactNumber") String contactNumber)
 	{
 		 final String method_name ="retrieveAdvertiser";
 		AdvertiserResponseRO responseRO = null;
@@ -60,12 +62,12 @@ public class AdvertiserRS
 		} 
 		catch (AdvertiserBusinessException  businessException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, method_name, "Business Exception occured while retrieving details from database");
+			LOGGER.logp(Level.SEVERE, CLASS_NAME, method_name, businessException.getMessage());
 			Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		catch (AdvertiserSystemException  systemException) 
 		{
-			Logger.getLogger(CLASS_NAME).logp(Level.SEVERE, CLASS_NAME, method_name, systemException.getMessage());
+			LOGGER.logp(Level.SEVERE, CLASS_NAME, method_name, systemException.getMessage());
 			Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
 		}
 		
